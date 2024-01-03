@@ -17,6 +17,9 @@ import java.util.Scanner;
     
     double discount = price * 0.10;
     
+    
+    
+    
       
     double grandTotal = price - discount;
     
