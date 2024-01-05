@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class checkOutAppDriversClass{
+public class heckOutAppDriversClass{
 
     public static void main(String... args){
   	
