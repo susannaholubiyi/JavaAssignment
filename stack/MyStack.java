@@ -1,13 +1,13 @@
 package stack;
 
+import java.util.EmptyStackException;
+
 public class MyStack {
 
     private int numberOfElements;
-    private int size;
     private String[] container;
 
     public MyStack(int size){
-        //this.size = size;
         container = new String[size];
 
     }
@@ -17,12 +17,19 @@ public class MyStack {
     }
 
     public void push(String element) {
+        if(numberOfElements >= container.length){
+            throw new StackOverflowError("Stack is full");
+        }
         container[numberOfElements] = element;
         numberOfElements++;
+
     }
 
 
     public String pop() {
+        if (numberOfElements <= 0){
+            throw new EmptyStackException();
+        }
         String lastElement = peek();
         --numberOfElements;
         return lastElement;
@@ -37,7 +44,6 @@ public class MyStack {
    }
 
 
-   public int capacity(){
-        return size;
-   }
+
+
 }

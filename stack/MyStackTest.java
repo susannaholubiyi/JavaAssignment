@@ -2,6 +2,8 @@ package stack;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.EmptyStackException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyStackTest {
@@ -59,9 +61,22 @@ public class MyStackTest {
         myStack.push("X");
 
         assertEquals("X",myStack.peek());
-
     }
 
+    @Test
+    public void pushMoreThanStackSize_exceptionIsThrownTest(){
+        MyStack myStack = new MyStack(2);
+        myStack.push("X");
+        myStack.push("joy");
 
 
+        assertThrows(StackOverflowError.class, () ->myStack.push("seyi"));
+    }
+
+    @Test
+    public void popEmptyStack_emptyStackExceptioIsThrownTest(){
+        MyStack myStack = new MyStack(2);
+
+        assertThrows(EmptyStackException.class, () ->myStack.pop());
+    }
 }
