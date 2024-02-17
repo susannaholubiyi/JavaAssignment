@@ -60,10 +60,11 @@ public class PersonTest {
         person.add(problem3);
         person.solve(problem);
 
-//        assertEquals(0, person.recount().size());
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("tithe: SPIRITUAL");
+        expected.add("capital: BUSINESS");
 
-
-
+        assertEquals(expected, person.recount());
 
     }
 

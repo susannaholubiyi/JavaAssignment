@@ -18,7 +18,11 @@ public class Person {
         problem.changeStatus();
     }
 
-//    public Collection<Object> recount() {
-//
-//    }
+    public ArrayList<String> recount() {
+        ArrayList<String> unsolvedProblem = new ArrayList<>();
+        for(int index = 0; index < problems.size();  index ++){
+            if(!problems.get(index).isSolved()) unsolvedProblem.add(String.valueOf(problems.get(index)));
+        }
+        return unsolvedProblem;
+    }
 }

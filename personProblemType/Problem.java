@@ -19,4 +19,10 @@ public class Problem {
     public void changeStatus() {
         isSolved = true;
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s: %s", name, type);
+    }
+
 }
