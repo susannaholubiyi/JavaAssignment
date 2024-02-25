@@ -52,7 +52,7 @@ public class AccountTest {
 
 
     @Test
-    public void withdrawWithInvalidPin_invalidPinExceptionIsThrownTest() {
+    public void withdrawWithPinMoreThanFourCharactersLong_invalidPinExceptionIsThrownTest() {
         Account account = new Account(1, "name", "1222");
 
         account.deposit(1000);

@@ -1,12 +1,10 @@
 package bank;
 
 import javax.swing.*;
-import java.util.Scanner;
 
 public class BankApp {
-    private static String smiley = "\uD83D\uDE00";
-    private static Bank myBankApp = new Bank();
-    private static Scanner scanner= new Scanner(System.in);
+    private static final String smiley = "\uD83D\uDE00";
+    private static final Bank myBankApp = new Bank();
 
     private static void print(String message){
         JOptionPane.showMessageDialog(null, message);

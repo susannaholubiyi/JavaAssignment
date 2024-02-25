@@ -6,9 +6,9 @@ import bank.exceptions.InvalidPinException;
 
 public class Account {
     private int balance;
-    private String pin;
+    private final String pin;
     private String name;
-    private int number;
+    private final int number;
 
 
     public Account(int accountNumber, String name, String pin){
@@ -33,7 +33,7 @@ public class Account {
     }
     public int checkBalance(String pin) {
        validate(pin);
-        return balance;
+       return balance;
     }
 
     public void withdraw(int amount, String pin) {

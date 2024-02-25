@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BankTest {
-    private Bank myBank = new Bank();
+    private final Bank myBank = new Bank();
     @BeforeEach
     public void bankInitializer(){
     }
@@ -31,14 +31,14 @@ public class BankTest {
    }
    @Test
     public void registerCustomer_removeAccount_listOfAccountsIsZeroTest(){
-       Account account1 = myBank.registerCustomer("firstName", "lastName", "0000");
+       myBank.registerCustomer("firstName", "lastName", "0000");
        myBank.removeAccount(1,"0000");
        assertEquals(0,myBank.getNumberOfCustomer());
    }
     @Test
     public void registerTwoCustomers_removeSecondCustomer_firstCustomerIsPresentTest(){
         Account account1 = myBank.registerCustomer("firstName", "lastName", "0000");
-        Account account2 = myBank.registerCustomer("firstName", "lastName", "0000");
+        myBank.registerCustomer("firstName", "lastName", "0000");
 
        myBank.removeAccount(2,"0000");
         assertEquals(account1, myBank.findAccount(1));
@@ -46,7 +46,7 @@ public class BankTest {
     }
     @Test
     public void registerTwoCustomers_removeFirstCustomer_secondCustomerIsPresentTest(){
-        Account account = myBank.registerCustomer("firstName", "lastName", "0000");
+        myBank.registerCustomer("firstName", "lastName", "0000");
         Account account1 = myBank.registerCustomer("firstName2", "lastName2", "0001");
         myBank.removeAccount(1,"0000");
         assertEquals(account1, myBank.findAccount(2));
@@ -80,7 +80,7 @@ public class BankTest {
     }
     @Test
     public void registerThreeAccounts_RemoveFirstAccount_firstAccountDoesNotExistTest(){
-        Account account1 = myBank.registerCustomer("firstName", "lastName", "0000");
+        myBank.registerCustomer("firstName", "lastName", "0000");
         myBank.registerCustomer("firstName", "lastName", "0000");
         myBank.registerCustomer("firstName", "lastName", "0000");
         assertEquals(3,myBank.getNumberOfCustomer());

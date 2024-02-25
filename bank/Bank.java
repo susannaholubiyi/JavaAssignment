@@ -52,7 +52,7 @@ public class Bank {
     }
 
     private int accountNumber = 1;
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private final ArrayList<Account> accounts = new ArrayList<>();
 
 
 
