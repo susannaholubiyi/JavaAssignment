@@ -1,5 +1,6 @@
 package diary;
 
+import diary.exception.DiaryIsLockedException;
 import diary.exception.IncorrectPasswordException;
 import diary.exception.InvalidIdExeception;
 import org.junit.jupiter.api.Test;
@@ -93,5 +94,27 @@ public class DiaryTest {
         assertEquals("body", diary.findEntryById(1).getBody());
         assertThrows(InvalidIdExeception.class, ()->diary.updateEntry(2,"newTitle","newBody"));
     }
+    @Test
+    public void createEntryWithoutUnlockingDiary_diaryIsLockedExceptionIsThrownTest(){
+        Diary diary = new Diary("SuzieBarbieque", "password");
+        assertTrue(diary.isLocked());
+        assertThrows(DiaryIsLockedException.class, ()->diary.createEntry("birthday wish list", "money"));
+    }
+    @Test
+    public void findEntryWithoutUnlockingDiary_diaryIsLockedExceptionIsThrownTest() {
+        Diary diary = new Diary("SuzieBarbieque", "password");
+        assertTrue(diary.isLocked());
+        assertThrows(DiaryIsLockedException.class, () -> diary.findEntryById(1));
+    }
+    @Test
+    public void createEntry_lockDiary_updateEntryWithoutUnlockingDiary_diaryIsLockedExceptionIsThrownTest() {
+        Diary diary = new Diary("SuzieBarbieque", "password");
+        diary.unlockDiary("password");
+        diary.createEntry("Title", "body");
+        diary.lockDiary();
+        assertTrue(diary.isLocked());
+        assertThrows(DiaryIsLockedException.class, () -> diary.updateEntry(1,"newTitle","newBody"));
+    }
+
 
 }
