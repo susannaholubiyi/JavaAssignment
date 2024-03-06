@@ -9,6 +9,7 @@ public class Bank {
     public Account registerCustomer(String firstName, String lastName, String pin) {
         String name = firstName +" " + lastName;
         Account account = new Account(accountNumber, name, pin);
+        account.validate(pin);
         accounts.add(account);
         accountNumber++;
         return account;
@@ -50,6 +51,7 @@ public class Bank {
         senderAccount.withdraw(amount,pin);
         receiverAccount.deposit(amount);
     }
+
 
     private int accountNumber = 1;
     private final ArrayList<Account> accounts = new ArrayList<>();

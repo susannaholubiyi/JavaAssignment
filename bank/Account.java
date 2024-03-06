@@ -25,6 +25,13 @@ public class Account {
     public int getAccountNumber(){
         return number;
     }
+    public String getName(){
+        return this.name;
+    }
+    @Override
+    public String toString(){
+        return this.name;
+    }
     public void deposit(int amount) {
         if(amount < 0) {
             throw new InvalidAmountException("Cannot deposit invalid amount");

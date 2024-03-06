@@ -23,8 +23,9 @@ public class BankApp {
                 3-> Withdraw
                 4-> Transfer
                 5-> Check account balance
-                6-> Close account
-                7-> Exit App
+                6-> Find account
+                7-> Close account
+                8-> Exit App
                 
                 <><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
                 """;
@@ -66,8 +67,8 @@ public class BankApp {
                 }
             case "3":
                 accountNumber = input("Enter your accountNumber:");
-                amount = input("Enter the amount you want to deposit:");
-                pin = input("Enter your pin");
+                amount = input("Enter the amount you want to withdraw:");
+                pin = input("Enter your pin: ");
                 try {
                     myBankApp.withdraw(Integer.parseInt(accountNumber),Integer.parseInt(amount),pin);
                     print(amount+ " withdrawn successfully " + smiley);
@@ -82,7 +83,7 @@ public class BankApp {
                 String senderAccount = input("Enter your accountNumber:");
                 String receiverAccount = input("Enter the accountNumber you want to send to:");
                 amount = input("Enter the amount you want to deposit:");
-                pin = input("Enter your pin");
+                pin = input("Enter your pin:");
 
                 try {
                     myBankApp.transfer(Integer.parseInt(senderAccount),Integer.parseInt(receiverAccount),
@@ -108,7 +109,20 @@ public class BankApp {
                 finally {
                     mainMenu();
                 }
-            case "6":
+            case "6":{
+                accountNumber = input("Enter your accountNumber:");
+                try {
+                    var bank = myBankApp.findAccount(Integer.parseInt(accountNumber));
+                    print(String.valueOf(bank));
+                }
+                catch (Exception e){
+                    print(e.getMessage());
+                }
+                finally {
+                    mainMenu();
+                }
+            }
+            case "7":
                 accountNumber = input("Enter your accountNumber:");
                 pin = input("Enter your pin");
                 try {
@@ -120,7 +134,7 @@ public class BankApp {
                 finally {
                     mainMenu();
                 }
-            case "7":
+            case "8":
                 System.exit(69);
                 break;
             default:mainMenu();
