@@ -2,7 +2,6 @@ package diary;
 
 import diary.exception.DiaryIsLockedException;
 import diary.exception.IncorrectPasswordException;
-import diary.exception.DiaryDoesNotExistException;
 
 import java.util.ArrayList;
 
@@ -45,12 +44,12 @@ public class Diary {
 
     public void deleteEntry(int id) {
         validateIsLocked();
-        Entry foundEntry = findEntryById(id);
+        Entry foundEntry = findEntry(id);
 
         entries.remove(foundEntry);
     }
 
-    public Entry findEntryById(int id) {
+    public Entry findEntry(int id) {
         validateIsLocked();
         for(Entry entry : entries) {
             if (entry.getId() == id)
@@ -59,15 +58,15 @@ public class Diary {
         }
         throw new diary.exception.InvalidIdExeception("Id is invalid, enter a valid Id");
     }
-
-
-
     public void updateEntry(int id, String title, String body) {
         validateIsLocked();
-        Entry foundEntry = findEntryById(id);
+        Entry foundEntry = findEntry(id);
         foundEntry.updateTitle(title);
         foundEntry.updateBody(body);
-
+    }
+    @Override
+    public String toString(){
+        return this.userName;
     }
     private boolean isLocked = true;
     private final String userName;
@@ -79,16 +78,6 @@ public class Diary {
             throw new DiaryIsLockedException("Unlock diary");
         }
     }
-    private void checkIfDiaryIsCreated() {
-        if(Diaries.size() == 0){
-            throw new DiaryDoesNotExistException("No entry has been created, create an entry");
-        }
-    }
+
 
 }
-
-
-
-
-
-

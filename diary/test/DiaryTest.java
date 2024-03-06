@@ -79,19 +79,19 @@ public class DiaryTest {
         Diary diary = new Diary("SuzieBarbieque", "password");
         diary.unlockDiary("password");
         diary.createEntry("Title","body");
-        assertEquals("Title",diary.findEntryById(1).getTitle());
-        assertEquals("body",diary.findEntryById(1).getBody());
+        assertEquals("Title",diary.findEntry(1).getTitle());
+        assertEquals("body",diary.findEntry(1).getBody());
         diary.updateEntry(1, "newTitle", "newBody");
-        assertEquals("newTitle",diary.findEntryById(1).getTitle());
-        assertEquals("newBody",diary.findEntryById(1).getBody());
+        assertEquals("newTitle",diary.findEntry(1).getTitle());
+        assertEquals("newBody",diary.findEntry(1).getBody());
     }
     @Test
     public void CreateEntry_updateEntryWithWrongId_invalidIdExceptionIsThrownTest() {
         Diary diary = new Diary("SuzieBarbieque", "password");
         diary.unlockDiary("password");
         diary.createEntry("Title", "body");
-        assertEquals("Title", diary.findEntryById(1).getTitle());
-        assertEquals("body", diary.findEntryById(1).getBody());
+        assertEquals("Title", diary.findEntry(1).getTitle());
+        assertEquals("body", diary.findEntry(1).getBody());
         assertThrows(InvalidIdExeception.class, ()->diary.updateEntry(2,"newTitle","newBody"));
     }
     @Test
@@ -103,8 +103,11 @@ public class DiaryTest {
     @Test
     public void findEntryWithoutUnlockingDiary_diaryIsLockedExceptionIsThrownTest() {
         Diary diary = new Diary("SuzieBarbieque", "password");
+        diary.unlockDiary("password");
+        diary.createEntry("Title", "body");
+        diary.lockDiary();
         assertTrue(diary.isLocked());
-        assertThrows(DiaryIsLockedException.class, () -> diary.findEntryById(1));
+        assertThrows(DiaryIsLockedException.class, () -> diary.findEntry(1));
     }
     @Test
     public void createEntry_lockDiary_updateEntryWithoutUnlockingDiary_diaryIsLockedExceptionIsThrownTest() {
@@ -114,6 +117,15 @@ public class DiaryTest {
         diary.lockDiary();
         assertTrue(diary.isLocked());
         assertThrows(DiaryIsLockedException.class, () -> diary.updateEntry(1,"newTitle","newBody"));
+    }
+    @Test
+    public void deleteEntryWithoutUnlockingDiary_diaryIsLockedExceptionIsThrownTest() {
+        Diary diary = new Diary("SuzieBarbieque", "password");
+        diary.unlockDiary("password");
+        diary.createEntry("Title", "body");
+        diary.lockDiary();
+        assertTrue(diary.isLocked());
+        assertThrows(DiaryIsLockedException.class, () -> diary.deleteEntry(1));
     }
 
 

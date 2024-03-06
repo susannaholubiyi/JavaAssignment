@@ -1,12 +1,13 @@
 package diary;
 
-import diary.exception.DiaryIsLockedException;
+import diary.exception.DiaryDoesNotExistException;
+import diary.exception.IncorrectPasswordException;
 
 import java.util.ArrayList;
 
 public class Diaries {
-    public static ArrayList<Diary> diaries = new ArrayList<>();
-    public static void add(String userName, String password){
+    public  ArrayList<Diary> diaries = new ArrayList<>();
+    public void add(String userName, String password){
         Diary diary = new Diary(userName, password);
         diaries.add(diary);
     }
@@ -16,22 +17,24 @@ public class Diaries {
                 return diary;
             }
         }
-        throw new DiaryIsLockedException("Diary does not exist");
+        throw new DiaryDoesNotExistException("Diary does not exist");
     }
-    public Diary findDiary(String userName, String password){
-        for(Diary diary : diaries){
-            boolean condition = diary.getUserName().equals(userName) && diary.getPassword().equals(password);
-            if(condition){
-                return diary;
-            }
-        }
-        throw new DiaryIsLockedException("Diary does not exist");
-    }
+
     public void deleteDiary(String userName, String password){
-        Diary foundDiary = findDiary(userName,password);
+        Diary foundDiary = findDiary(userName);
+        validatePassword(password);
         diaries.remove(foundDiary);
     }
-    public static int size(){
+    private boolean validatePassword(String password){
+        for(Diary diary : diaries){
+            if(diary.getPassword().equals(password)){
+                return true;
+            }
+        }
+        throw new IncorrectPasswordException("Password is incorrect");
+
+    }
+    public int size(){
         return diaries.size();
     }
 }

@@ -3,7 +3,7 @@ package diary;
 import java.time.LocalDateTime;
 
 public class Entry {
-    private int id = 0;
+    private final int id;
     private String title;
     private String body;
     private LocalDateTime dateCreated;
@@ -30,6 +30,6 @@ public class Entry {
     }
     @Override
     public String toString(){
-        return this.title + "" + this.body;
+        return this.title + " " + this.body;
     }
 }
