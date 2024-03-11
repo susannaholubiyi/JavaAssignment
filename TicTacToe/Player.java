@@ -16,21 +16,12 @@ public class Player {
         return cellType;
     }
 
-    public void play(int cellNumber) {
-       int row = convertToRowFrom(cellNumber);
-       int column =convertToColumnFrom(cellNumber);
+    public void play(TicTacToe ticTacToe, int position) {
+        ticTacToe.markBoard(this.id, position);
 
 
     }
 
-    private static int convertToRowFrom(int cellNumber) {
-        int row = (cellNumber -1) /3;
-        return row;
-    }
 
-    private static int convertToColumnFrom(int cellNumber) {
-        int column = (cellNumber - 1) % 3;
-        return column;
-    }
 
 }
